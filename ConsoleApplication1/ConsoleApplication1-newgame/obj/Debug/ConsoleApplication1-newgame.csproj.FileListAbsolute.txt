@@ -1,0 +1,6 @@
+F:\Repo\C# Projects\ConsoleApplication1\ConsoleApplication1-newgame\bin\Debug\ConsoleApplication1-newgame.exe.config
+F:\Repo\C# Projects\ConsoleApplication1\ConsoleApplication1-newgame\bin\Debug\ConsoleApplication1-newgame.exe
+F:\Repo\C# Projects\ConsoleApplication1\ConsoleApplication1-newgame\bin\Debug\ConsoleApplication1-newgame.pdb
+F:\Repo\C# Projects\ConsoleApplication1\ConsoleApplication1-newgame\obj\Debug\ConsoleApplication1-newgame.csprojResolveAssemblyReference.cache
+F:\Repo\C# Projects\ConsoleApplication1\ConsoleApplication1-newgame\obj\Debug\ConsoleApplication1-newgame.exe
+F:\Repo\C# Projects\ConsoleApplication1\ConsoleApplication1-newgame\obj\Debug\ConsoleApplication1-newgame.pdb
