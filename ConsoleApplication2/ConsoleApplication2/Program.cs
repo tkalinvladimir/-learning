@@ -43,12 +43,14 @@ namespace ConsoleApplication2
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                     Console.Write(" ");
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                    // хренова функция. бекспейс не отрабатывает. надо из резалта отнимать символ стёртый справа
+                    //result = ki.KeyChar.ToString();
 
                     simbs--;
                 }
                 else if (ki.Key == ConsoleKey.Enter)
                     work = false;
-                else if (char.IsDigit(ki.KeyChar))
+                else if (char.IsDigit(ki.KeyChar) || ki.KeyChar==',')
                 {
                     simbs++;
                     Console.Write(ki.KeyChar.ToString());
