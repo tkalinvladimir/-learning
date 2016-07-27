@@ -16,13 +16,17 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             Initialize();
+
             Console.Clear();
+
             while (Health>0) 
                 {
                 UserInterface();
                 GetDamage();
                 }
+
             UserInterface();
+
             Console.ReadLine();
         }
 
@@ -31,22 +35,27 @@ namespace ConsoleApplication1
         {
             PlayerIsDead = false;
             Health = 100;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Введите имя:");
-            PlayerName = Console.ReadLine();
-            Console.WriteLine("Введите возраст:");
-            Age = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Добро пожаловать, " + PlayerName + " " + Age);
+            PlayerName = AskUser_string("Введите ваше имя:");
+            Age = Convert.ToInt32(AskUser_string("Введите ваш возраст:"));
+            Console.WriteLine("Добро пожаловать, {0} - {1}", PlayerName, Age);
             Console.ReadLine();
 
         }
 
+        private static string AskUser_string(string message_to_user)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message_to_user);
+            return Console.ReadLine();
+        }
+
+
+
         private static void GetDamage()
         {
             int Damage = 0;
-            Console.WriteLine("Введите урон: ");
-            Damage = Convert.ToInt32(Console.ReadLine());
-            Health = Health - Damage;
+            Damage = Convert.ToInt32(AskUser_string("Введите урон:"));
+            Health -= Damage;
             Console.Clear();
         }
 

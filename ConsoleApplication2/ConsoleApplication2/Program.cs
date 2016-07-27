@@ -8,30 +8,64 @@ namespace ConsoleApplication2
 {
     class Program
     {
-
         static bool DoorIsOpen = false;
         static bool UserHasHands = false;
         static bool HaveKey = false;
 
         static void Main(string[] args)
         {
-
-
-            Initialize();
-            Game1();
-            Console.Clear();
-            Game2();
-            Console.Clear();
-            Game3();
-            Console.Clear();
-            Game4();
-            Console.Clear();
-
-
+            bool exit_menu = false;
+            while (!exit_menu)
+            {
+                Console.Clear();
+                Console.ResetColor();
+                Console.WriteLine("Тут 5 игр. Для выбора игры введите цифры от 1 до 5.\nДля выхода нажмите 0");
+                string answer = Convert.ToString(askInteger(""));
+                switch (answer)
+                {
+                    case "0":
+                        exit_menu = true;
+                        break;
+                    case "1":
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Initialize();
+                        Game1();
+                        break;
+                    case "2":
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Game2();
+                        break;
+                    case "3":
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Game3();
+                        break;
+                    case "4":
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Game4();
+                        break;
+                    case "5":
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Game5();
+                        break;
+                } 
+            }
+            Console.WriteLine("Good bye! :(");
+            Console.ReadLine();
         }
 
-        private static int askInteger()
+        private static void Game5()
         {
+            
+        }
+
+        private static int askInteger(string message)
+        {
+            Console.WriteLine(message);
             bool work = true;
             string result = "0";
             int simbs = 0;
@@ -44,7 +78,6 @@ namespace ConsoleApplication2
                     Console.Write(" ");
                     Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                     result = result.Remove(result.Length-1); // но можно и через саб стрингс
-
                     simbs--;
                 }
                 else if (ki.Key == ConsoleKey.Enter)
@@ -66,15 +99,13 @@ namespace ConsoleApplication2
             bool Eternity = true;
             while (Eternity)
             {
-                Console.WriteLine("Введите число \"150\":");
-                int i = askInteger();
-               
+                
+                int i = askInteger("Введите число \"150\":");
                     if (i == 150)
                     {
                         Console.WriteLine("Здорово! Вы ввели {0}!!!", i);
                         break;
                     }
-                
             }
             Console.ReadLine();
         }
@@ -96,8 +127,7 @@ namespace ConsoleApplication2
                 }
                 else if (Answer.ToLower() == "say")
                 {
-                    Console.WriteLine("Сколько раз повторить?");
-                    count = Convert.ToInt32(Console.ReadLine());
+                    count = askInteger("Сколько раз повторить ?");
 
                     for (int i = 0; i < count; i++)
                     {
@@ -107,23 +137,16 @@ namespace ConsoleApplication2
                 else
                 {
                     Console.WriteLine("Я не закончусь пока ты не введешь \"exit\" или скажи \"say\"");
-
                 }
-                
-
-
             }
                 Console.ReadLine();
-
-           
         }
 
         private static void Game2()
         {
-            Console.WriteLine("Введите слово: ");
-            string Answer = Console.ReadLine();
-            Console.WriteLine("Сколько раз повторить?");
-            int j = Convert.ToInt32(Console.ReadLine());
+            
+            string Answer = AskUser_string("Введите слово: ");
+            int j = Convert.ToInt32(AskUser_string("Сколько раз повторить?"));
             for (int i = 0; i < j; i++)
             {
                 Console.WriteLine(Answer);
@@ -133,7 +156,7 @@ namespace ConsoleApplication2
 
         private static void Game1()
         {
-            if (DoorIsOpen || (UserHasHands && HaveKey))
+            if (DoorIsOpen || UserHasHands && HaveKey)
             {
                 Console.WriteLine("Вы смогли пройти в следующую комнату.");
                 Console.ReadLine();
@@ -145,13 +168,22 @@ namespace ConsoleApplication2
             }
         }
 
+        private static char AskUser_char(string message_to_user)
+        {
+            Console.WriteLine(message_to_user);
+            return Console.ReadKey().KeyChar;
+        }
+
+        private static string AskUser_string(string message_to_user)
+        {
+            Console.WriteLine(message_to_user);
+            return Console.ReadLine();
+        }
+
         private static void Initialize()
         {
-
             char Answer;
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Дверь открыта? y|n");
-            Answer = Console.ReadKey().KeyChar;
+            Answer = AskUser_char("Дверь открыта? y|n");
             if (Answer == 'y')
             {
                 DoorIsOpen = true;
@@ -163,8 +195,7 @@ namespace ConsoleApplication2
 
             Console.Clear();
 
-            Console.WriteLine("У пользователя есть руки? y|n");
-            Answer = Console.ReadKey().KeyChar;
+            Answer = AskUser_char("У пользователя есть руки? y|n");
             if (Answer == 'y')
             {
                 UserHasHands = true;
@@ -176,8 +207,7 @@ namespace ConsoleApplication2
 
             Console.Clear();
 
-            Console.WriteLine("Есть ключ? y|n");
-            Answer = Console.ReadKey().KeyChar;
+            Answer = AskUser_char("Есть ключ? y|n");
             if (Answer == 'y')
             {
                 HaveKey = true;
@@ -188,13 +218,9 @@ namespace ConsoleApplication2
             }
 
             Console.Clear();
-
             Console.WriteLine("Let's go!");
             Console.ReadLine();
-            Console.ResetColor();
-            Console.Clear();
-
-
+           
         }
     }
 }
