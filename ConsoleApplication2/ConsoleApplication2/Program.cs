@@ -60,7 +60,53 @@ namespace ConsoleApplication2
 
         private static void Game5()
         {
-            
+            int x = 0, y = 0;
+            ConsoleKeyInfo k;
+            Console.CursorVisible = false;
+            while (true)
+            {
+                k = Console.ReadKey(true);
+                if (k.Key == ConsoleKey.RightArrow)
+                {
+                    x += 1;
+                    if (x > Console.WindowWidth - 1)
+                    {
+                        x = Console.WindowWidth - 1;
+                    }
+
+                }
+                if (k.Key == ConsoleKey.LeftArrow)
+                {
+                    x -= 1;
+                    if (x < 0)
+                    {
+                        x = 0;
+                    }
+                }
+                if (k.Key == ConsoleKey.UpArrow)
+                {
+                    y -= 1;
+                    if (y < 0)
+                    {
+                        y = 0;
+                    }
+                }
+                if (k.Key == ConsoleKey.DownArrow)
+                {
+                    y += 1;
+                    if (y > Console.WindowHeight - 1)
+                    {
+                        y = Console.WindowHeight - 1;
+                    }
+                }
+                if (k.Key == ConsoleKey.Z)
+                {
+                    break;
+                }
+                Console.Clear();
+                Console.SetCursorPosition(x, y);
+                Console.Write("$");
+            }
         }
 
         private static int askInteger(string message)
