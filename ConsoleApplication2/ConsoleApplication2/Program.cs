@@ -19,7 +19,7 @@ namespace ConsoleApplication2
             {
                 Console.Clear();
                 Console.ResetColor();
-				// menu
+				// menu 123
                 Console.WriteLine("Тут 5 игр. Для выбора игры введите цифры от 1 до 5.\nДля выхода нажмите 0");
                 string answer = Convert.ToString(askInteger(""));
                 switch (answer)
