@@ -73,7 +73,6 @@ namespace ConsoleApplication2
                     {
                         x = Console.WindowWidth - 1;
                     }
-
                 }
                 if (k.Key == ConsoleKey.LeftArrow)
                 {
