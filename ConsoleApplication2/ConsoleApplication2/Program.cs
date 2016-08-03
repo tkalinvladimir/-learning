@@ -74,7 +74,6 @@ namespace ConsoleApplication2
                     {
                         x = Console.WindowWidth - 1;
                     }
-
                 }
                 if (k.Key == ConsoleKey.LeftArrow)
                 {
@@ -146,7 +145,6 @@ namespace ConsoleApplication2
             bool Eternity = true;
             while (Eternity)
             {
-                
                 int i = askInteger("Введите число \"150\":");
                     if (i == 150)
                     {
@@ -191,7 +189,6 @@ namespace ConsoleApplication2
 
         private static void Game2()
         {
-            
             string Answer = AskUser_string("Введите слово: ");
             int j = Convert.ToInt32(AskUser_string("Сколько раз повторить?"));
             for (int i = 0; i < j; i++)
@@ -267,7 +264,6 @@ namespace ConsoleApplication2
             Console.Clear();
             Console.WriteLine("Let's go!");
             Console.ReadLine();
-           
         }
     }
 }
