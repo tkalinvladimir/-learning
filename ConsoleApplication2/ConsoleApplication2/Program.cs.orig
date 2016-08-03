@@ -20,8 +20,11 @@ namespace ConsoleApplication2
                 Console.Clear();
                 Console.ResetColor();
 				// menu 123
-				// 222
+<<<<<<< HEAD
 				// 111
+=======
+				// 222
+>>>>>>> feature2
 				// menu 321
                 Console.WriteLine("Тут 5 игр. Для выбора игры введите цифры от 1 до 5.\nДля выхода нажмите 0");
                 string answer = Convert.ToString(askInteger(""));
