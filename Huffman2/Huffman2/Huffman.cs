@@ -1,13 +1,11 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Huffman2
 {
 
-    class Node : IComparable<Node>
+    class Node : System.IComparable<Node>
     {
         public int Weight { get; set; }
         public List<byte> data;
@@ -39,7 +37,6 @@ namespace Huffman2
         public void AddData(List<byte> data)
         {
             this.data.AddRange(data);
-
         }
 
         public bool isFindData(byte data)
@@ -53,17 +50,6 @@ namespace Huffman2
                 return 1;
             else
                 return this.Weight.CompareTo(comparePart.Weight);
-        }
-
-        public static string makeEncodeString(string originalString, Node ROOT)
-        {
-            string s = "";
-            for (int i = 0; i < originalString.Length; i++)
-            {
-                char c = originalString[i];
-                Node.Find(ROOT, (byte)c, ref s, 0);
-            }
-            return s;
         }
 
         public static void Find(Node N, byte c, ref string s, int deep)
@@ -83,8 +69,6 @@ namespace Huffman2
             if (deep == 0) s = s + "0";
         }
 
-        }
-
         public static int[] calcWeights(string s)
         {
             int[] res = new int[256];
@@ -97,7 +81,7 @@ namespace Huffman2
 
         public static CodeTable Encode(string originalString)
         {
-            int[] x = Node.calcWeights(originalString);
+            int[] x = calcWeights(originalString);
             List<Node> List = new List<Node>();
 
             for (int i = 0; i <= 255; i++)
@@ -132,12 +116,12 @@ namespace Huffman2
                 if (x[i] != 0)
                 {
                     string s = "";
-                    Node.Find(root, (byte)x[i], ref s,0);
+                    Node.Find(root, (byte)x[i], ref s, 0);
                     table.putIn((byte)x[i], s);
                 }
             }
             return table;
-                     
+
         }
 
     }
