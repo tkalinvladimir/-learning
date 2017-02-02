@@ -61,29 +61,28 @@ namespace Huffman2
             for (int i = 0; i < originalString.Length; i++)
             {
                 char c = originalString[i];
-                Node.Find(ROOT, (byte)c, ref s);
+                Node.Find(ROOT, (byte)c, ref s, 0);
             }
             return s;
         }
 
-        public static void Find(Node N, byte c, ref string s)
+        public static void Find(Node N, byte c, ref string s, int deep)
         {
-            if (N.data.Count() == 1)
-            {
-                return; //нашли но тект уже прибавлен ранее при входе сюда
-            }
             if (N.left != null && N.left.isFindData(c))
             {
                 s = s + "0";
-                Find(N.left, c, ref s);
+                Node.Find(N.left, c, ref s, deep + 1);
                 return;
             }
             if (N.right != null && N.right.isFindData(c))
             {
                 s = s + "1";
-                Find(N.right, c, ref s);
+                Node.Find(N.right, c, ref s, deep + 1);
                 return;
             }
+            if (deep == 0) s = s + "0";
+        }
+
         }
 
         public static int[] calcWeights(string s)
@@ -133,7 +132,7 @@ namespace Huffman2
                 if (x[i] != 0)
                 {
                     string s = "";
-                    Node.Find(root, (byte)x[i], ref s);
+                    Node.Find(root, (byte)x[i], ref s,0);
                     table.putIn((byte)x[i], s);
                 }
             }
