@@ -9,16 +9,16 @@ namespace Huffman2
 {
     class CodeTable
     {
-        public Dictionary<byte, string> dict;
+        public Dictionary<byte, BitArray> dict;
         Node ROOT;
 
         public CodeTable(Node Root)
         {
-            this.dict = new Dictionary<byte, string>();
+            this.dict = new Dictionary<byte, BitArray>();
             this.ROOT = Root;
         }
 
-        public void putIn(byte b, string bits)
+        public void putIn(byte b, BitArray bits)
         {
             try
             {
@@ -34,10 +34,16 @@ namespace Huffman2
             string s = "";
             foreach (char c in originalString)
             {
-                string value = "";
+                BitArray value;
                 if (this.dict.TryGetValue((byte)c, out value))
                 {
-                    s = s + value;
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var b in value)
+                    {
+                        sb.Append((bool)b ? "1" : "0");
+                    }
+                    sb.ToString();
+                    s = s + sb;
                 }
             }
             return s;

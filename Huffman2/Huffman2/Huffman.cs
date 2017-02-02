@@ -1,4 +1,5 @@
 ﻿
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -117,7 +118,21 @@ namespace Huffman2
                 {
                     string s = "";
                     Node.Find(root, (byte)i, ref s, 0);
-                    table.putIn((byte)i, s);
+
+                    BitArray bitArr = new BitArray(s.Length);
+                    for (int j=0; j< s.Length; j++)
+                    {
+                        if (s[j] == '0')
+                        {
+                            bitArr.Set(j, false);
+                        }
+                        if (s[j] == '1')
+                        {
+                            bitArr.Set(j, true);
+                        }
+                    }
+
+                    table.putIn((byte)i, bitArr);
                 }
             }
             return table;
