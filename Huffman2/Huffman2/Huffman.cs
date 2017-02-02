@@ -116,13 +116,11 @@ namespace Huffman2
                 if (x[i] != 0)
                 {
                     string s = "";
-                    Node.Find(root, (byte)x[i], ref s, 0);
-                    table.putIn((byte)x[i], s);
+                    Node.Find(root, (byte)i, ref s, 0);
+                    table.putIn((byte)i, s);
                 }
             }
             return table;
-
         }
-
     }
 }

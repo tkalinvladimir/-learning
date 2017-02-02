@@ -22,7 +22,7 @@ namespace Huffman2
         private void button1_Click(object sender, EventArgs e)
         {
             table = Node.Encode(textBox1.Text);
-            textBox2.Text = table.getEncodeString(textBox2.Text);
+            textBox2.Text = table.getEncodeString(textBox1.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
