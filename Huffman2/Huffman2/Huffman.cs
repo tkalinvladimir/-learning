@@ -181,7 +181,7 @@ namespace Huffman2
                             } 
                         }
                     }
-                    if (isMatch && bt.Value.Count != 0)
+                    if (isMatch && bt.Value.Count == searchArr.Count)
                     {
                         s = s + (char)bt.Key;
                         searchString = "";
