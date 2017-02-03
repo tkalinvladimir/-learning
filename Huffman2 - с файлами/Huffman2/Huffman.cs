@@ -77,10 +77,10 @@ namespace Huffman2
         {
             
 
-            int[] res = new int[s.Length];
-            foreach (byte b in s)
+            int[] res = new int[255];
+            for (int i = 0; i< s.Length; i++)
             {
-                res[b]++;
+                res[s[i]]++;
             }
             return res;
         }
@@ -91,7 +91,7 @@ namespace Huffman2
             int[] x = calcWeights(allBytes);
             List<Node> List = new List<Node>();
 
-            for (int i = 0; i < allBytes.Length; i++)
+            for (int i = 0; i < 255; i++)
             {
                 if (x[i] != 0)
                 {
@@ -118,7 +118,7 @@ namespace Huffman2
 
             CodeTable table = new CodeTable(root);
 
-            for (int i = 0; i < allBytes.Length; i++)
+            for (int i = 0; i < 255; i++)
             {
                 if (x[i] != 0)
                 {
