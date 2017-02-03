@@ -27,7 +27,7 @@ namespace Huffman2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //textBox3.Text = Node.Decode(textBox2.Text);
+            textBox3.Text = Node.Decode(textBox2.Text,table);
         }
 
         private void button3_Click(object sender, EventArgs e)

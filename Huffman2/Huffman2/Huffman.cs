@@ -120,7 +120,7 @@ namespace Huffman2
                     Node.Find(root, (byte)i, ref s, 0);
 
                     BitArray bitArr = new BitArray(s.Length);
-                    for (int j=0; j< s.Length; j++)
+                    for (int j = 0; j < s.Length; j++)
                     {
                         if (s[j] == '0')
                         {
@@ -136,6 +136,58 @@ namespace Huffman2
                 }
             }
             return table;
+        }
+
+        public static string Decode(string CodeString, CodeTable table)
+        {
+            string s = "";
+            string searchString = "";
+            foreach (char b in CodeString)
+            {
+
+                if (b == '0')
+                {
+                    searchString = searchString + '0';
+                }
+                if (b == '1')
+                {
+                    searchString = searchString + '1';
+                }
+
+
+                BitArray searchArr = new BitArray(searchString.Length);
+                for (int j = 0; j < searchString.Length; j++)
+                {
+                    if (searchString[j] == '0')
+                    {
+                        searchArr.Set(j, false);
+                    }
+                    if (searchString[j] == '1')
+                    {
+                        searchArr.Set(j, true);
+                    }
+                }
+
+                foreach (var bt in table.dict)
+                {
+                    bool isMatch = true;
+                    if (bt.Value.Count == searchArr.Count)
+                    {
+                        for (int i = 0; i < bt.Value.Count; i++)
+                        {
+                            if (bt.Value[i] != searchArr[i])
+                            {
+                                isMatch = false;
+                            } 
+                        }
+                    }
+                    if (isMatch && bt.Value.Count != 0)
+                    {
+                        s = s + (char)bt.Key;
+                    }
+                }
+            }
+            return s;
         }
     }
 }
