@@ -184,6 +184,8 @@ namespace Huffman2
                     if (isMatch && bt.Value.Count != 0)
                     {
                         s = s + (char)bt.Key;
+                        searchString = "";
+                        break;
                     }
                 }
             }
