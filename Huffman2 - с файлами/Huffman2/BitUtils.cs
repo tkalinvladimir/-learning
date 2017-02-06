@@ -52,12 +52,20 @@ namespace Huffman2
             // Get the size of bytes needed to store all bytes
             int bytesize = count / ByteLength;
 
+            // добавим 4 байта на хранение длины файла и 1 на позицию бита**********************************************************************************
+            //**********************************************************************************************************************************************
+            bytesize = bytesize + 5;
+
             // Any bit left over another byte is necessary
             if (count % ByteLength > 0)
                 bytesize++;
 
             // For the result
             byte[] bytes = new byte[bytesize];
+            var bytesSize = BitConverter.GetBytes(count / ByteLength);
+
+            bytesSize.CopyTo(bytes, 0);
+            
 
             // Must init to good value, all zero bit byte has value zero
             // Lowest significant bit has a place value of 1, each position to
@@ -66,7 +74,9 @@ namespace Huffman2
             byte significance = 1;
 
             // Remember where in the input/output arrays
-            int bytepos = 0;
+            //**********************************************************************************************************************************************
+            //**********************************************************************************************************************************************
+            int bytepos = 5;
             int bitpos = startIndex;
 
             while (bitpos - startIndex < count)
@@ -93,7 +103,17 @@ namespace Huffman2
                 }
             }
             if (count % ByteLength > 0)
+            {
                 bytes[bytepos] = value;
+                bytes[4] = (byte)(count % ByteLength);
+            }
+            else
+            {
+                bytes[4] = (byte)(count % ByteLength);
+            }
+            //**********************************************************************************************************************************************
+            //**********************************************************************************************************************************************
+
 
             return bytes;
         }

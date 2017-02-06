@@ -9,7 +9,7 @@ using System.Text;
 namespace Huffman2
 {
 
-    class Node : System.IComparable<Node>
+   public class Node : System.IComparable<Node>
     {
         public int Weight { get; set; }
         List<bool> bits; 

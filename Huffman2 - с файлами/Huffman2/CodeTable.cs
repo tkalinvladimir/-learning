@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Huffman2
 {
-    class CodeTable
+    public class CodeTable
     {
         public const int ByteLength = 8;
 
@@ -23,7 +23,7 @@ namespace Huffman2
 
         public void putIn(byte b, BitArray bits)
         {
-            
+
             try
             {
                 dict.Add(b, bits);
@@ -31,17 +31,17 @@ namespace Huffman2
             catch
             {
             }
-            }
+        }
 
-        public string getEncodeString(string originalString)
+        public string getEncodeString(string originalString, CodeTable table)
         {
             string s = "";
             byte[] allBytes = File.ReadAllBytes(originalString);
             foreach (byte c in allBytes)
             {
-                
+
                 BitArray value;
-                
+
                 if (this.dict.TryGetValue(c, out value))
                 {
                     StringBuilder sb = new StringBuilder();
@@ -53,7 +53,7 @@ namespace Huffman2
                     s = s + sb;
                 }
             }
-            System.Console.WriteLine(s);
+            Console.WriteLine(s);
             BitArray bt = new BitArray(s.Length);
             for (int j = 0; j < s.Length; j++)
             {
@@ -86,9 +86,8 @@ namespace Huffman2
         {
             try
             {
-                System.IO.FileStream _FileStream =
-                   new System.IO.FileStream(_FileName, System.IO.FileMode.Create,
-                                            System.IO.FileAccess.Write);
+                FileStream _FileStream =
+                    new FileStream(_FileName, FileMode.Create, FileAccess.Write);
                 _FileStream.Write(_ByteArray, 0, _ByteArray.Length);
 
                 _FileStream.Close();
