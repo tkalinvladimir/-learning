@@ -12,6 +12,7 @@ namespace Huffman2
     class Node : System.IComparable<Node>
     {
         public int Weight { get; set; }
+        List<bool> bits; 
         public List<byte> data;
         public Node left;
         public Node right;
@@ -31,6 +32,15 @@ namespace Huffman2
             this.data = new List<byte>();
             this.left = left;
             this.right = right;
+        }
+
+        public override string ToString()
+        {
+            string s = "";
+            foreach (var d in data) {
+                s = s + (char)d;            }
+            return s;
+            
         }
 
         public void AddData(byte data)
@@ -77,7 +87,7 @@ namespace Huffman2
         {
             
 
-            int[] res = new int[255];
+            int[] res = new int[256];
             for (int i = 0; i< s.Length; i++)
             {
                 res[s[i]]++;
@@ -91,7 +101,7 @@ namespace Huffman2
             int[] x = calcWeights(allBytes);
             List<Node> List = new List<Node>();
 
-            for (int i = 0; i < 255; i++)
+            for (int i = 0; i <= 255; i++)
             {
                 if (x[i] != 0)
                 {
@@ -112,18 +122,20 @@ namespace Huffman2
                     List.Remove(nodes2[0]);
                     List.Remove(nodes2[1]);
                     List.Add(newN);
+                    System.Console.WriteLine(nodes2[0].ToString() +" + " +nodes2[1].ToString() + " = " +newN.ToString());
                 }
             }
             Node root = List.First();
 
             CodeTable table = new CodeTable(root);
 
-            for (int i = 0; i < 255; i++)
+            for (int i = 0; i <= 255; i++)
             {
                 if (x[i] != 0)
                 {
                     string s = "";
                     Node.Find(root, (byte)i, ref s, 0);
+                    System.Console.WriteLine(i.ToString() + " = " + s);
 
                     BitArray bitArr = new BitArray(s.Length);
                     for (int j = 0; j < s.Length; j++)

@@ -92,6 +92,9 @@ namespace Huffman2
                     significance *= 2;
                 }
             }
+            if (count % ByteLength > 0)
+                bytes[bytepos] = value;
+
             return bytes;
         }
 

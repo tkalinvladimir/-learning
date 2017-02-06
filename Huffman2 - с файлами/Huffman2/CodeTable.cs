@@ -23,6 +23,7 @@ namespace Huffman2
 
         public void putIn(byte b, BitArray bits)
         {
+            
             try
             {
                 dict.Add(b, bits);
@@ -38,7 +39,9 @@ namespace Huffman2
             byte[] allBytes = File.ReadAllBytes(originalString);
             foreach (byte c in allBytes)
             {
+                
                 BitArray value;
+                
                 if (this.dict.TryGetValue(c, out value))
                 {
                     StringBuilder sb = new StringBuilder();
@@ -50,7 +53,7 @@ namespace Huffman2
                     s = s + sb;
                 }
             }
-
+            System.Console.WriteLine(s);
             BitArray bt = new BitArray(s.Length);
             for (int j = 0; j < s.Length; j++)
             {
