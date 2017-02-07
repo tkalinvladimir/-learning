@@ -223,7 +223,7 @@ namespace Huffman2
 
             byte[] toBytes = Encoding.ASCII.GetBytes(s);
             CodeString = CodeString.Replace("_vovrar","");
-            bool succes = CodeTable.ByteArrayToFile(CodeString+"1", toBytes);
+            bool succes = CodeTable.ByteArrayToFile_decode(CodeString+"1", toBytes);
             if (succes)
             {
                 s = CodeString + "1";

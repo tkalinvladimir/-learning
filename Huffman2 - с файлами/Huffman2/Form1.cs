@@ -56,5 +56,18 @@ namespace Huffman2
             }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = Environment.SpecialFolder.DesktopDirectory.ToString();
+            openFileDialog1.Filter = "All files (*.*)|*.*";
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                textBox2.Text = openFileDialog1.FileName;
+            }
+
+        }
     }
 }

@@ -67,9 +67,10 @@ namespace Huffman2
                 }
             }
 
-
-            byte[] ba = BitUtils.BitArrayToByteArray(bt);
-            bool succes = ByteArrayToFile(originalString + "_vovrar", ba);
+            var res = BitUtils.BitArrayToByteArray(bt);
+            byte[] ba = res.Item1;
+            var bitpos = res.Item2;
+            bool succes = ByteArrayToFile(originalString + "_vovrar", ba, bitpos);
             if (succes)
             {
                 s = originalString + "_vovrar";
@@ -82,13 +83,41 @@ namespace Huffman2
             return s;
         }
 
-        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray)
+        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray, byte bitPos)
         {
             try
             {
-                FileStream _FileStream =
-                    new FileStream(_FileName, FileMode.Create, FileAccess.Write);
-                _FileStream.Write(_ByteArray, 0, _ByteArray.Length);
+                FileStream _FileStream = new FileStream(_FileName, FileMode.Create, FileAccess.Write);
+                int ba = _ByteArray.Length;
+                byte[] _ByteArray5 = BitConverter.GetBytes(ba);
+                byte[] bitPosition = new byte[1];
+                bitPosition[0] = bitPos;
+
+                _FileStream.Write(_ByteArray5, 0, 4);
+                _FileStream.Write(bitPosition, 0, 1);
+                _FileStream.Write(_ByteArray, 0, ba);
+
+                _FileStream.Close();
+
+                return true;
+            }
+            catch (Exception _Exception)
+            {
+                Console.WriteLine("Exception caught in process: {0}",
+                                  _Exception.ToString());
+            }
+
+            return false;
+        }
+
+        public static bool ByteArrayToFile_decode(string _FileName, byte[] _ByteArray)
+        {
+            try
+            {
+                FileStream _FileStream = new FileStream(_FileName, FileMode.Create, FileAccess.Write);
+                int ba = _ByteArray.Length;
+
+                _FileStream.Write(_ByteArray, 0, ba);
 
                 _FileStream.Close();
 
