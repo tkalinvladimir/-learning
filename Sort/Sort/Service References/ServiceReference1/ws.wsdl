@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://era.glonass.ru/ext/eraRegistrationService" targetNamespace="http://era.glonass.ru/ext/eraRegistrationService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="tns" location="/manufacturer/cxf/ws?wsdl=activation.xsd" />
+  <wsdl:types />
+  <wsdl:message name="getRequestStatusByIccidResponse">
+    <wsdl:part name="getRequestStatusByIccidResponse" element="tns:getRequestStatusByIccidResponse" />
+  </wsdl:message>
+  <wsdl:message name="requestFault">
+    <wsdl:part name="fault" element="tns:requestFault" />
+  </wsdl:message>
+  <wsdl:message name="getRequestStatusByIccidRequest">
+    <wsdl:part name="getRequestStatusByIccidRequest" element="tns:getRequestStatusByIccidRequest" />
+  </wsdl:message>
+  <wsdl:message name="deactivateVehicleByVinRequest">
+    <wsdl:part name="deactivateVehicleByVinRequest" element="tns:deactivateVehicleByVinRequest" />
+  </wsdl:message>
+  <wsdl:message name="changeVehicleAttributesResponse">
+    <wsdl:part name="changeVehicleAttributesResponse" element="tns:changeVehicleAttributesResponse" />
+  </wsdl:message>
+  <wsdl:message name="activateVehicleResponse">
+    <wsdl:part name="activateVehicleResponse" element="tns:activateVehicleResponse" />
+  </wsdl:message>
+  <wsdl:message name="activateVehicleRequest">
+    <wsdl:part name="activateVehicleRequest" element="tns:activateVehicleRequest" />
+  </wsdl:message>
+  <wsdl:message name="changeVehicleAttributesRequest">
+    <wsdl:part name="changeVehicleAttributesRequest" element="tns:changeVehicleAttributesRequest" />
+  </wsdl:message>
+  <wsdl:message name="deactivateVehicleByIccidResponse">
+    <wsdl:part name="deactivateVehicleByIccidResponse" element="tns:deactivateVehicleByIccidResponse" />
+  </wsdl:message>
+  <wsdl:message name="deactivateVehicleByIccidRequest">
+    <wsdl:part name="deactivateVehicleByIccidRequest" element="tns:deactivateVehicleByIccidRequest" />
+  </wsdl:message>
+  <wsdl:message name="getRequestStatusByRequestIdResponse">
+    <wsdl:part name="getRequestStatusByRequestIdResponse" element="tns:getRequestStatusByRequestIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="deactivateVehicleByVinResponse">
+    <wsdl:part name="deactivateVehicleByVinResponse" element="tns:deactivateVehicleByVinResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRequestStatusByRequestIdRequest">
+    <wsdl:part name="getRequestStatusByRequestIdRequest" element="tns:getRequestStatusByRequestIdRequest" />
+  </wsdl:message>
+  <wsdl:portType name="VehicleActivationPort">
+    <wsdl:operation name="getRequestStatusByRequestId">
+      <wsdl:input name="getRequestStatusByRequestIdRequest" message="tns:getRequestStatusByRequestIdRequest" />
+      <wsdl:output name="getRequestStatusByRequestIdResponse" message="tns:getRequestStatusByRequestIdResponse" />
+      <wsdl:fault name="error" message="tns:requestFault" />
+    </wsdl:operation>
+    <wsdl:operation name="getRequestStatusByIccid">
+      <wsdl:input name="getRequestStatusByIccidRequest" message="tns:getRequestStatusByIccidRequest" />
+      <wsdl:output name="getRequestStatusByIccidResponse" message="tns:getRequestStatusByIccidResponse" />
+      <wsdl:fault name="error" message="tns:requestFault" />
+    </wsdl:operation>
+    <wsdl:operation name="deactivateVehicleByIccid">
+      <wsdl:input name="deactivateVehicleRequest" message="tns:deactivateVehicleByIccidRequest" />
+      <wsdl:output name="deactivateVehicleResponse" message="tns:deactivateVehicleByIccidResponse" />
+      <wsdl:fault name="error" message="tns:requestFault" />
+    </wsdl:operation>
+    <wsdl:operation name="deactivateVehicleByVin">
+      <wsdl:input name="deactivateVehicleRequest" message="tns:deactivateVehicleByVinRequest" />
+      <wsdl:output name="deactivateVehicleResponse" message="tns:deactivateVehicleByVinResponse" />
+      <wsdl:fault name="error" message="tns:requestFault" />
+    </wsdl:operation>
+    <wsdl:operation name="activateVehicle">
+      <wsdl:input name="activateVehicleRequest" message="tns:activateVehicleRequest" />
+      <wsdl:output name="activateVehicleResponse" message="tns:activateVehicleResponse" />
+      <wsdl:fault name="error" message="tns:requestFault" />
+    </wsdl:operation>
+    <wsdl:operation name="changeVehicleAttributes">
+      <wsdl:input name="changeVehicleAttributesRequest" message="tns:changeVehicleAttributesRequest" />
+      <wsdl:output name="changeVehicleAttributesResponse" message="tns:changeVehicleAttributesResponse" />
+      <wsdl:fault name="error" message="tns:requestFault" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="VehicleActivationPortSoap12" type="tns:VehicleActivationPort">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getRequestStatusByRequestId">
+      <soap12:operation soapAction="" />
+      <wsdl:input name="getRequestStatusByRequestIdRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRequestStatusByRequestIdResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="error">
+        <soap12:fault use="literal" name="error" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRequestStatusByIccid">
+      <soap12:operation soapAction="" />
+      <wsdl:input name="getRequestStatusByIccidRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getRequestStatusByIccidResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="error">
+        <soap12:fault use="literal" name="error" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deactivateVehicleByIccid">
+      <soap12:operation soapAction="" />
+      <wsdl:input name="deactivateVehicleRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deactivateVehicleResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="error">
+        <soap12:fault use="literal" name="error" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deactivateVehicleByVin">
+      <soap12:operation soapAction="" />
+      <wsdl:input name="deactivateVehicleRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deactivateVehicleResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="error">
+        <soap12:fault use="literal" name="error" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="activateVehicle">
+      <soap12:operation soapAction="" />
+      <wsdl:input name="activateVehicleRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="activateVehicleResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="error">
+        <soap12:fault use="literal" name="error" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeVehicleAttributes">
+      <soap12:operation soapAction="" />
+      <wsdl:input name="changeVehicleAttributesRequest">
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="changeVehicleAttributesResponse">
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="error">
+        <soap12:fault use="literal" name="error" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="VehicleActivationPortService">
+    <wsdl:port name="VehicleActivationPortSoap12" binding="tns:VehicleActivationPortSoap12">
+      <soap12:address location="/manufacturer/cxf/ws" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

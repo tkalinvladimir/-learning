@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://era.glonass.ru/ext/eraRegistrationService" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://era.glonass.ru/ext/eraRegistrationService" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:element name="activateVehicleRequest" type="ActivateVehicleRequestType" />
+      <xsd:element name="activateVehicleResponse" type="ActivateVehicleResponseType" />
+      <xsd:element name="deactivateVehicleByIccidRequest" type="DeactivateVehicleByIccidRequestType" />
+      <xsd:element name="deactivateVehicleByVinRequest" type="DeactivateVehicleByVinRequestType" />
+      <xsd:element name="deactivateVehicleByIccidResponse" type="DeactivateByIccidRequestResultType" />
+      <xsd:element name="deactivateVehicleByVinResponse" type="DeactivateByVinRequestResultType" />
+      <xsd:element name="changeVehicleAttributesRequest" type="ChangeVehicleAttributesRequestType" />
+      <xsd:element name="changeVehicleAttributesResponse" type="ChangeVehicleAttributesResponseType" />
+      <xsd:element name="getRequestStatusByRequestIdRequest" type="GetRequestStatusByRequestIdRequestType" />
+      <xsd:element name="getRequestStatusByRequestIdResponse" type="GetRequestStatusByRequestIdResponseType" />
+      <xsd:element name="getRequestStatusByIccidRequest" type="GetRequestStatusByIccidRequestType" />
+      <xsd:element name="getRequestStatusByIccidResponse" type="GetRequestStatusByIccidResponseType" />
+      <xsd:complexType name="ActivateVehicleRequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request message for "activateVehicle" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="300" name="vehicle">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        List of Vehicle-Terminal pairs to activate. Additional required attributes: vehicle's color,
+                        vehicle's
+                        brand, vehicle's model and VBN
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="BaseVehicleAttributesType">
+                  <xsd:attribute name="iccid" type="ICCID_type" use="required" />
+                  <xsd:attribute name="brand" type="Brand_type" use="optional">
+                    <xsd:annotation>
+                      <xsd:documentation>
+                                        Mandatory for Vehicle Manufacturer role, optional for other roles.
+                                    </xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                  <xsd:attribute name="model" type="Model_type" use="optional">
+                    <xsd:annotation>
+                      <xsd:documentation>
+                                        Mandatory for Vehicle Manufacturer role, optional for other roles.
+                                    </xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeactivateVehicleByIccidRequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request message for "deactivateVehicle" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="300" name="terminal">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        List of ICCIDs to deactivate.
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:attribute name="iccid" type="ICCID_type" use="required">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="en-gb">
+                                Terminal ICCID to deactivate.
+                            </xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeactivateVehicleByVinRequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request message for "deactivateVehicle" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="300" name="terminal">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        List of VINs to deactivate.
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:attribute name="vin" type="VIN_type" use="required">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="en-gb">
+                                VIN of the vehicle to deactivate AT for.
+                            </xsd:documentation>
+                </xsd:annotation>
+              </xsd:attribute>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ChangeVehicleAttributesRequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request message for "changeVehicleAttributes" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1000" name="vehicle">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        List of Vehicle-Terminal pairs to activate. Additional required attributes: vehicle's color,
+                        vehicle's
+                        brand, vehicle's model and VBN
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:restriction base="xsd:anyType">
+                  <xsd:attribute name="vin" type="VIN_type" use="required">
+                    <xsd:annotation>
+                      <xsd:documentation>
+			                            Mandatory for Vehicle Manufacturer role, optional for other roles.
+			                        </xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                  <xsd:attribute name="vbn" type="VBN_type" use="optional" />
+                  <xsd:attribute name="color" type="Color_type" use="required">
+                    <xsd:annotation>
+                      <xsd:documentation>
+			                            Mandatory for Vehicle Manufacturer role, optional for other roles.
+			                        </xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                  <xsd:attribute name="brandAndModel" type="Brand_Model_type" use="required" />
+                </xsd:restriction>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ChangeVehicleAttributesResponseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Response for "changeAttributes" methods
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1000" name="result">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request results: list with processing results or error codes.
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="RequestResultType">
+                  <xsd:attribute name="vin" type="VIN_type" use="required">
+                    <xsd:annotation>
+                      <xsd:documentation>
+	                                VIN will be returned if original request supplied VIN value.
+	                            </xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RequestResultType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">Base type for Common Response</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="xsd:anyType">
+            <xsd:attribute name="status" type="StatusCode" use="required">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en-gb">
+                         Processing status
+                     </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="statusDescr" type="xsd:string">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en-gb">
+                         Detailed status description (for errors mostly)
+                     </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="ActivateVehicleResponseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Response for "activateVehicle" methods
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="300" name="result">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request results: list with assigned request Ids or error codes.
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="BaseRequestResponseType">
+                  <xsd:attribute name="vin" type="VIN_type" use="optional">
+                    <xsd:annotation>
+                      <xsd:documentation>
+                                        VIN will be returned if original request supplied VIN value.
+                                    </xsd:documentation>
+                    </xsd:annotation>
+                  </xsd:attribute>
+                  <xsd:attribute name="iccid" type="ICCID_type" use="required" />
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeactivateByIccidRequestResultType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Response for "deactivateVehicleByIccid" methods
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="300" name="result">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request results: list with assigned request Ids or error codes.
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="BaseRequestResponseType">
+                  <xsd:attribute name="iccid" type="ICCID_type" use="required" />
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DeactivateByVinRequestResultType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Response for "deactivateVehicleByVin" methods
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="300" name="result">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request results: list with assigned request Ids or error codes.
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="BaseRequestResponseType">
+                  <xsd:attribute name="vin" type="VIN_type" use="required" />
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="StatusCode">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Operation status code.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="OK">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Success
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="TS_PARAMETERS_UPDATED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request successfully processed (the terminal is already active on this vehicle, the vehicle attribute values are updated)
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="MANDATORY_PARAMETERS_NOT_SPECIFIED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Mandatory parameters are not specified 
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="VBN_MATCH_OTHER_TS">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        VBN is already tied to another vehicle
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="CONFLICT_WAS_FOUND ">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                         There was a conflict of these data with the data in the database, 
+                         the application will be reviewed by the administrator                         
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="USER_HAS_NO_RIGHTS">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                         User have not permission to action with this SIM-card               
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="VIN_ALREADY_PRESENT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          The terminal is already activated               
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="DEVICE_ALREADY_ACTIVATED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          The terminal with the ICCID already activated    
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="INTERNAL_ERROR">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          System internal error
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="VIN_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect VIN
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="VBN_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect VBN
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="ICCID_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect ICCID
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="BRAND_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect Brand
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="MODEL_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect Model
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="COLOR_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect Color
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="DEVICE_NOT_FOUND">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Device not found
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="BRAND_AND_MODEL_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Brand and model have incorrect value
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="ATTRIBUTES_NOT_UPDATED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Can not change attributes
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="VEHICLE_NOT_FOUND">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Vehicle not found
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="GetRequestStatusByRequestIdRequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request for "getActivationStatus" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1000" name="request">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        List of request Ids to obtain processing status for them
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:attribute name="requestId" type="REQUEST_ID_Type" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetRequestStatusByRequestIdResponseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Response for "getRequestStatus" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1000" name="status">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Status for every requestId from the request
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="BaseRequestStatusResponseType">
+                  <xsd:attribute name="requestId" type="REQUEST_ID_Type" use="required" />
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetRequestStatusByIccidRequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request for "getActivationStatusByIccid" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1000" name="request">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        List of ICCIDs to obtain processing status for them
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:attribute name="iccid" type="ICCID_type" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="GetRequestStatusByIccidResponseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Response for "getRequestStatusByIccid" method
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="3000" name="status">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Status for every ICCID from the request
+                    </xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexType>
+              <xsd:complexContent mixed="false">
+                <xsd:extension base="BaseRequestStatusResponseType">
+                  <xsd:attribute name="iccid" type="ICCID_type" use="required" />
+                </xsd:extension>
+              </xsd:complexContent>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="RequestProcessingStatus">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Activation statuses
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="REQUEST_SUBMITTED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        The request is still being processed
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="REQUEST_COMPLETED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Successful completion. VIN-ICCID pair is activated
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="REQUEST_REJECTED">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request was rejected. VIN-ICCID pair is not activated
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="USER_HAS_NO_RIGHTS">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Requested ICCID / RequestId is not allowed for requesting user. No request status returned
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="REQUEST_NOT_FOUND">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Request was not found for provided RequestID / ICCID. No request status returned
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="INTERNAL_ERROR">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        An error occurred during the activation process. VIN-ICCID pair activation status is unknown
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="ICCID_IS_INCORRECT">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                          Specified an incorrect ICCID
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ICCID_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Terminal ICCID
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="VIN_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Vehicle Identification Number
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="REQUEST_ID_Type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request ID obtained in the call to "activateVehicle", "deactivateVehicle", "changeVehicleAttributes"
+                methods
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:long" />
+      </xsd:simpleType>
+      <xsd:simpleType name="MSISDN_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Assigned MSISDN value in case of successful activation
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="VBN_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Vehicle Board Number
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="Brand_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Vehicle brand
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="Model_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Vehicle model
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="Brand_Model_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Vehicle Brand and Model
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="Color_type">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Vehicle color
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+      <xsd:simpleType name="RequestType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Request type returned in status response
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ACTIVATION">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Activate AT request
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="DEACTIVATION">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Deactivate AT request
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="ACTIVATE_DEVICE_TEST">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Test call
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="CHANGE_VIN">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Change VIN
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+          <xsd:enumeration value="CHANGE_SIM">
+            <xsd:annotation>
+              <xsd:documentation xml:lang="en-gb">
+                        Change SIM
+                    </xsd:documentation>
+            </xsd:annotation>
+          </xsd:enumeration>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="BaseVehicleAttributesType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Base type for Vehicle attribute containers.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="xsd:anyType">
+            <xsd:attribute name="vin" type="VIN_type" use="optional">
+              <xsd:annotation>
+                <xsd:documentation>
+                            Mandatory for Vehicle Manufacturer role, optional for other roles.
+                        </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="vbn" type="VBN_type" use="optional" />
+            <xsd:attribute name="color" type="Color_type" use="optional">
+              <xsd:annotation>
+                <xsd:documentation>
+                            Mandatory for Vehicle Manufacturer role, optional for other roles.
+                        </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="BaseRequestStatusResponseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Base type for Status responses.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="xsd:anyType">
+            <xsd:attribute name="msisdn" type="MSISDN_type" use="optional" />
+            <xsd:attribute name="requestDateTime" type="xsd:dateTime" use="optional" />
+            <xsd:attribute name="requestType" type="RequestType" use="optional">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en-gb">
+                            Type of the request to query status for.
+                        </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="requestProcessingStatus" type="RequestProcessingStatus" use="required">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en-gb">
+                            Request processing status
+                        </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="requestStatusDetails" type="xsd:string">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en-gb">
+                            Details for FAILED status
+                        </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:complexType name="BaseRequestResponseType">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="en-gb">
+                Base type for Request responses.
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexContent mixed="false">
+          <xsd:extension base="RequestResultType">
+            <xsd:attribute name="requestId" type="REQUEST_ID_Type" use="optional">
+              <xsd:annotation>
+                <xsd:documentation xml:lang="en-gb">
+                            Request ID for accepted requests.
+                            Absent in case for particular ICCID request was not accepted for processing (i.e. staus !=
+                            OK).
+                        </xsd:documentation>
+              </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute name="requestType" type="RequestType" use="required" />
+          </xsd:extension>
+        </xsd:complexContent>
+      </xsd:complexType>
+      <xsd:element name="requestFault" type="RequestFault" />
+      <xsd:complexType name="RequestFault">
+        <xsd:annotation>
+          <xsd:documentation xml:lang="ru-ru">
+                Ошибка, возникшая при обработки запроса
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute name="faultCode" use="required">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="ru-ru">
+                    Код ошибки
+                </xsd:documentation>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:string">
+              <xsd:enumeration value="INTERNAL_ERROR">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="ru-ru">
+                                При обработке запроса произошла непредвиденная ошибка
+                            </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+              <xsd:enumeration value="NOT_AUTHORIZED">
+                <xsd:annotation>
+                  <xsd:documentation xml:lang="ru-ru">
+                                Запрос от пользователя, у которого нет прав на работу с данным сервисом
+                            </xsd:documentation>
+                </xsd:annotation>
+              </xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:attribute>
+        <xsd:attribute name="faultDetails" type="xsd:string">
+          <xsd:annotation>
+            <xsd:documentation xml:lang="ru-ru">
+                    Дополнительная информация (например, в случае E_UNKNOWN_ERROR)
+                </xsd:documentation>
+          </xsd:annotation>
+        </xsd:attribute>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+</wsdl:definitions>
