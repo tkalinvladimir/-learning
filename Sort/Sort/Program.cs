@@ -26,6 +26,9 @@ namespace Sort
             Console.WriteLine("Сортировка слиянием.");
             Methods<int>.sort_sliyanie(arraytosort);
             Methods<int>.printArray(arraytosort);
+            arraytosort = new int[] { 3, 7, 4, 4, 6, 5, 8 };
+            Methods<int>.sort_fast(arraytosort);
+            Methods<int>.printArray(arraytosort);
             Console.ReadKey();
         }
     }
