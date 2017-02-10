@@ -34,7 +34,7 @@ namespace WorkWithFiles
             {
                 File.Delete("E:\\colors.txt");
             }
-            string s = "red,green,black,white,blue";
+            string s = "red,green5545454,black,white,blue";
             string[] sArr = s.Split(',');
 
             foreach (string inSArr in sArr)
@@ -42,9 +42,25 @@ namespace WorkWithFiles
                 File.AppendAllText("E:\\colors.txt", inSArr + "\r\n");
             }
 
+
             if (File.Exists("E:\\colors.txt"))
             {
-
+                FileStream fs = new FileStream("E:\\colors.txt", FileMode.Open);
+                StreamReader sr = new StreamReader(fs);
+                int maxLength = 0;
+                string s1 = "";
+                string findStr = "";
+                while (!sr.EndOfStream)
+                {
+                    s1 = sr.ReadLine();
+                    if (s1.Length > maxLength)
+                    {
+                        maxLength = s1.Length;
+                        findStr = s1;
+                    }
+                }
+                Console.WriteLine("самая длинная строка - " + findStr + ", ее длина - " + maxLength);
+                Console.ReadKey();
             }
 
         }
