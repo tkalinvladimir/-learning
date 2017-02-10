@@ -70,7 +70,7 @@ namespace Huffman2
             var res = BitUtils.BitArrayToByteArray(bt);
             byte[] ba = res.Item1;
             var bitpos = res.Item2;
-            bool succes = ByteArrayToFile(originalString + "_vovrar", ba, bitpos);
+            bool succes = ByteArrayToFile(originalString + "_vovrar", ba, bitpos, dict);
             if (succes)
             {
                 s = originalString + "_vovrar";
@@ -83,7 +83,7 @@ namespace Huffman2
             return s;
         }
 
-        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray, byte bitPos)
+        public static bool ByteArrayToFile(string _FileName, byte[] _ByteArray, byte bitPos, Dictionary<byte, BitArray> dict)
         {
             try
             {
@@ -96,6 +96,22 @@ namespace Huffman2
                 _FileStream.Write(_ByteArray5, 0, 4);
                 _FileStream.Write(bitPosition, 0, 1);
                 _FileStream.Write(_ByteArray, 0, ba);
+
+                foreach (var CodingByte in dict)
+                {
+
+                    var res = BitUtils.BitArrayToByteArray(CodingByte.Value);
+                    byte[] CodingDictData = res.Item1;
+                    int bitPosDict = res.Item2;
+                    int dlina = CodingDictData.Length;
+                    byte[] CodingDictHeader = new byte[3];
+                    CodingDictHeader[0] = CodingByte.Key;
+                    CodingDictHeader[1] = (byte)dlina;
+                    CodingDictHeader[2] = (byte)bitPosDict;
+                    _FileStream.Write(CodingDictHeader, 0, CodingDictHeader.Length);
+                    _FileStream.Write(CodingDictData, 0, CodingDictData.Length);
+                }
+
 
                 _FileStream.Close();
 
