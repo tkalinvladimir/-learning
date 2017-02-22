@@ -18,6 +18,14 @@ namespace structures
             double[] radius = new double[] { 2.3, 2.1, 2,7, 2.9, 1.8 };
             double averageBYlinq = (from ord in radius select ord).Average();
             Console.WriteLine("The average is " + averageBYlinq);
+            var nearestBYlinq = radius.OrderBy(x => Math.Abs((double)x - (from ord in radius select ord).Average())).First();
+            // (from ord in radius select ord).Average()) - наша цель - среднее
+            // OrderBy(x => Math.Abs((double)x - (from ord in radius select ord).Average()) сортирует по возрастанию результаты разницы между элементом и средним
+
+            //  First() - берем ьтолько первый - минимальный
+
+            Console.WriteLine("The nearest member of the array found by LINQ to the average array is " + nearestBYlinq);
+
             Circle c;
             c.calcradiuses(radius);
             Console.ReadKey();
