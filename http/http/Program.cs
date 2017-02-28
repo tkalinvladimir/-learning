@@ -32,11 +32,15 @@ namespace http
             Console.Clear();
            */
 
-            
+            /*
+             * Ваша программа должна выводить в консоль заголовки уроков с главной страницы сайта (те, что в центральной колонке, 8 последних).
+             *  Кроме этого, я настроил сервер так, что если заголовок user-agent при запросе к главной странице сайта равен значению "lesson34", 
+             *  то в ответ вы получите не главную страницу, а страницу контактов. Установите значение "lesson34" для этого заголовка и убедитесь, что это работает.
+             */
             HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://mycsharp.ru");
             req.Proxy = WebRequest.GetSystemWebProxy();
             req.Proxy.Credentials = CredentialCache.DefaultCredentials;
-            req.UserAgent = "lesson34";
+            //req.UserAgent = "lesson34";
             HttpWebResponse response = req.GetResponse() as HttpWebResponse; 
             StreamReader reader = new StreamReader(response.GetResponseStream(), Encoding.UTF8);
             string answer = reader.ReadToEnd();
