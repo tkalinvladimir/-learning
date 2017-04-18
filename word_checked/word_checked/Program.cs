@@ -20,6 +20,7 @@ namespace word_checked
             }
             catch (OverflowException ex)
             {
+                Console.Beep(247,1600);
                 Console.WriteLine(ex.Message);
             }
             Console.ReadKey();
